@@ -94,12 +94,3 @@ namespace Slaux_Lab_5_6
         }
     }
 }
-/*
- * Your job in this lab is to use a struct to create a Customer, and then implement IF 
-statements to check if they of legal age to order and belong to membership programs.
-Each customer should have a first name and last name, age, and membership status.
-Create 3 customers and test all of them with IF Then Statements.
-1.  Customer 1 is underage 
-2.  Customer 2 is legal age but not a premium member
-3.  Customer 3 is legal age and a premium member
-*/
