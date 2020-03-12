@@ -69,18 +69,39 @@ namespace Slaux_Lab_11_5
             */
             Film[] everyFilm = sakila.Film.ToArray();
 
-            List<Film> linqlist = (from i in everyFilm
-                                   where i.release_year.Equals("2019")
+            List<Film> filmList2019 = (from i in everyFilm
+                                       where i.release_year.Equals("2019")
                                    select i).ToList();
-         
+
+            List<Film> filmListLessThan80 = (from i in everyFilm
+                                   where i.length < 90
+                                   select i).ToList();
+            List<Film> filmListGreaterThan80 = (from i in everyFilm
+                                             where i.length >= 90
+                                             select i).ToList();
+
+
             StringBuilder myHtml = new StringBuilder();
-            myHtml.Append("<html>\n<body>\n<h1>Newly Released Movies</h1>\n<ul>\n");
+            myHtml.Append("<html>\n<body style=\"background-color:powderblue;\">\n<h1>Newly Released Movies</h1>\n<ul>\n");
            
-            foreach (Film f in linqlist)
+            foreach (Film f in filmList2019)
             {
-                myHtml.Append("<li>" + "Title: " + f.title + " " + "Description: " + f.description + "</li>\n");
+                myHtml.Append("<li>" + f.title + " (" + f.release_year + ")" + "</li>\n");
             }
-            myHtml.Append("</ul>\n</body>\n</html>");
+            myHtml.Append("</ul>\n");
+            myHtml.Append("<h2>Films shorter than an hour and 30 minutes long</h2>\n<ul>\n");
+
+            foreach (Film j in filmListLessThan80)
+            {
+                myHtml.Append("<li>" + j.title + " (" + j.length +" minutes)" + "</li>\n");
+            }
+            myHtml.Append("</ul>\n");
+            myHtml.Append("<h2>Films longer than an hour and 30 minutes long</h2>\n<ul>\n");
+            foreach (Film i in filmListGreaterThan80)
+            {
+                myHtml.Append("<li>" + i.title + " (" + i.length + " minutes)" + "</li>\n");
+            }
+            myHtml.Append("</ul>\n</body>\n</html>\n");
             Console.WriteLine(myHtml);
             string htmlFile = "D:\\Generated HTML\\newMovies.html";
             File.WriteAllText(htmlFile, myHtml.ToString());
